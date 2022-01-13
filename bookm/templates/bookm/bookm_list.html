@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block title %}Bookmark List{% endblock %}
+{% block content%}
+<a class="ui green button right" style="float:left;" href="{% url 'create' %}">Add Bookmark</a>
+<div style="clear:both;"></div>
+    <table class="ui celled table" style="margin-top:10px;">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Site</th>
+            <th scope="col">URL</th>
+            <th scope="col">Modify</th>
+            <th scope="col">Delete</th>
+        </tr>
+        </thead>
+        <tbody>
+            {% for bookm in object_list %}
+            <tr>
+                <td>{{forloop.counter}}</td>
+                <td><a href="{% url 'detail' pk=bookm.id %}">{{bookm.site_name}}</a></td>
+                <td><a href="{{bookm.site_url}}" target="_blank">{{bookm.site_url}}</a></td>
+                <td><a href="{% url 'update' pk=bookm.id %}" class="btn btn-success btn-sm">Modify </a></td>
+                <td><a href="{% url 'delete' pk=bookm.id %}"  class="btn btn-danger btn-sm">Delete </a></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
